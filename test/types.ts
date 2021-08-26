@@ -1,5 +1,6 @@
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/dist/src/signer-with-address";
 import { Fixture } from "ethereum-waffle";
+import { IUniswapV2Router02 } from "../typechain";
 import { HarvestFinanceAdapter } from "../typechain/HarvestFinanceAdapter";
 import { TestDeFiAdapter } from "../typechain/TestDeFiAdapter";
 
@@ -19,6 +20,8 @@ export interface Signers {
 export interface PoolItem {
   pool: string;
   lpToken: string;
+  stakingPool?: string;
+  rewardTokens?: string[];
   tokens: string[];
 }
 
@@ -30,6 +33,7 @@ declare module "mocha" {
   export interface Context {
     harvestFinanceAdapter: HarvestFinanceAdapter;
     testDeFiAdapter: TestDeFiAdapter;
+    uniswapV2Router02: IUniswapV2Router02;
     loadFixture: <T>(fixture: Fixture<T>) => Promise<T>;
     signers: Signers;
   }
